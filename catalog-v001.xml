@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <!--
+    OASIS XML Catalog for FIBO Ontology Resolution
+    
+    This catalog maps FIBO ontology URIs to local files in ontology-hub-referencemodels/.
+    Tools that support XML catalogs (Protégé, rdflib with rdflib-catalog) will use
+    local files instead of fetching from the internet.
+    
+    Generated for FIBO version: Q3 2025 (master_2025Q3)
+    -->
+    
+    <!-- FIBO Foundation (FND) - Agents and People -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/AgentsAndPeople/Agents.rdf"/>
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/AgentsAndPeople/People.rdf"/>
+    
+    <!-- FIBO Foundation (FND) - Organizations -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/Organizations/FormalOrganizations.rdf"/>
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/Organizations/Organizations.rdf"/>
+    
+    <!-- FIBO Foundation (FND) - Agreements -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/Agreements/Contracts.rdf"/>
+    
+    <!-- FIBO Foundation (FND) - Law -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/Law/LegalCore.rdf"/>
+    
+    <!-- FIBO Foundation (FND) - Relations -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/Relations/Relations.rdf"/>
+    
+    <!-- FIBO Foundation (FND) - Dates and Times -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/DatesAndTimes/FinancialDates.rdf"/>
+    
+    <!-- FIBO Foundation (FND) - Products and Services -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/" 
+         uri="ontologies/external/Authoritative-Ontologies/FIBO/edmcouncil-fibo-da9e773/FND/ProductsAndServices/ProductsAndServices.rdf"/>
+    
+    <!-- Add more FIBO module mappings as needed -->
+    
+</catalog>
+

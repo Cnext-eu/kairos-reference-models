@@ -1,0 +1,106 @@
+name: Release Reference Models
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  validate-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install kairos-ontology-toolkit
+        run: |
+          pip install --upgrade pip
+          pip install kairos-ontology-toolkit
+      
+      - name: Validate before release
+        run: |
+          echo "🔍 Validating reference models before release..."
+          kairos-ontology validate --all --ontologies ontologies --shapes shapes
+          kairos-ontology catalog-test --catalog catalog-v001.xml
+      
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Releasing version: $VERSION"
+      
+      - name: Verify VERSION file matches tag
+        run: |
+          FILE_VERSION=$(cat VERSION)
+          TAG_VERSION=${{ steps.get_version.outputs.version }}
+          if [ "$FILE_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ VERSION file ($FILE_VERSION) does not match tag ($TAG_VERSION)"
+            exit 1
+          fi
+          echo "✅ Version file matches tag: $TAG_VERSION"
+      
+      - name: Create release archive
+        run: |
+          tar -czf kairos-reference-models-${{ steps.get_version.outputs.version }}.tar.gz \
+            ontologies/ \
+            shapes/ \
+            mappings/ \
+            catalog-v001.xml \
+            VERSION \
+            CHANGELOG.md \
+            README.md \
+            LICENSE
+      
+      - name: Generate release notes from CHANGELOG
+        id: changelog
+        run: |
+          VERSION=${{ steps.get_version.outputs.version }}
+          # Extract section for this version from CHANGELOG.md
+          NOTES=$(sed -n "/## \[$VERSION\]/,/## \[/p" CHANGELOG.md | sed '$ d')
+          if [ -z "$NOTES" ]; then
+            NOTES="See CHANGELOG.md for details."
+          fi
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version.outputs.version }}
+          body: ${{ steps.changelog.outputs.notes }}
+          draft: false
+          prerelease: ${{ contains(steps.get_version.outputs.version, '-') }}
+      
+      - name: Upload release archive
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./kairos-reference-models-${{ steps.get_version.outputs.version }}.tar.gz
+          asset_name: kairos-reference-models-${{ steps.get_version.outputs.version }}.tar.gz
+          asset_content_type: application/gzip
+      
+      - name: Publish to artifact registry (optional)
+        if: false  # Enable when Azure Blob Storage is configured
+        run: |
+          # Example: Upload to Azure Blob Storage
+          # az storage blob upload \
+          #   --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
+          #   --container-name reference-models \
+          #   --name kairos-reference-models-${{ steps.get_version.outputs.version }}.tar.gz \
+          #   --file kairos-reference-models-${{ steps.get_version.outputs.version }}.tar.gz
+          echo "Artifact registry publishing disabled. Enable when needed."

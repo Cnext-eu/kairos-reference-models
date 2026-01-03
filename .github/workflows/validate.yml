@@ -1,0 +1,72 @@
+name: Validate Reference Models
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install kairos-ontology-toolkit
+        run: |
+          pip install --upgrade pip
+          pip install kairos-ontology-toolkit
+      
+      - name: Display toolkit version
+        run: kairos-ontology --version
+      
+      - name: Validate ontology syntax and SHACL
+        run: |
+          kairos-ontology validate \
+            --ontologies ontologies \
+            --shapes shapes \
+            --all
+      
+      - name: Test XML catalog resolution
+        run: |
+          kairos-ontology catalog-test --catalog catalog-v001.xml
+      
+      - name: Generate test projections
+        run: |
+          kairos-ontology project \
+            --target all \
+            --ontologies ontologies \
+            --mappings mappings \
+            --output test-output
+      
+      - name: Upload validation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-reports
+          path: |
+            validation-report.json
+            validation-report-skos.json
+            test-output/
+          retention-days: 30
+      
+      - name: Comment on PR
+        if: github.event_name == 'pull_request' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Validation failed. Please check the validation report artifacts for details.'
+            })
