@@ -42,6 +42,10 @@
     <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/" 
          uri="ontologies/authoritative-ontologies/FIBO/edmcouncil-fibo-da9e773/FND/ProductsAndServices/ProductsAndServices.rdf"/>
     
+    <!-- FIBO Business Entities (BE) - Partnerships -->
+    <uri name="https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/" 
+         uri="ontologies/authoritative-ontologies/FIBO/edmcouncil-fibo-da9e773/BE/Partnerships/Partnerships.rdf"/>
+    
     <!-- Add more FIBO module mappings as needed -->
     
 </catalog>
