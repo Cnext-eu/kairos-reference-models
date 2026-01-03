@@ -27,9 +27,10 @@ The Kairos Reference Models repository provides validated, versioned ontologies 
 kairos-reference-models/
 ├── ontologies/                # Core ontology files
 │   ├── core.ttl               # Kairos core model (Customer, Order, Product, Service)
-│   └── external/              # External reference ontologies
-│       ├── fibo-*.rdf         # FIBO Q3 2025 (300+ files)
-│       └── README.md
+│   ├── authoritative-ontologies/  # Official RDF/OWL from standards bodies
+│   │   └── FIBO/              # FIBO Q3 2025 (300+ files)
+│   ├── derived-ontologies/    # Our RDF interpretations of non-RDF standards
+│   └── README.md
 ├── shapes/                    # SHACL validation constraints
 │   ├── core.shacl.ttl         # Validation rules for core.ttl
 │   └── README.md
@@ -173,7 +174,7 @@ kairos:Product owl:sameAs schema:Product ;
 
 ### Financial Industry Business Ontology
 
-[ontologies/external/](ontologies/external/) contains 300+ FIBO Q3 2025 ontologies:
+[ontologies/authoritative-ontologies/FIBO/](ontologies/authoritative-ontologies/FIBO/) contains 300+ FIBO Q3 2025 ontologies:
 
 - **fibo-fnd**: Foundations (agents, organizations, people)
 - **fibo-fbc**: Business Contracts
@@ -185,7 +186,7 @@ kairos:Product owl:sameAs schema:Product ;
 
 ```xml
 <uri name="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"
-     uri="ontologies/external/fibo-agents.rdf"/>
+     uri="ontologies/authoritative-ontologies/FIBO/edmcouncil-fibo-da9e773/FND/AgentsAndPeople/Agents.rdf"/>
 ```
 
 This enables offline development and consistent import resolution.
