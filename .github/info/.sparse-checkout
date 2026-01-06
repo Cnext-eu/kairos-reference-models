@@ -5,7 +5,7 @@
 #
 # To apply this configuration to a submodule, run:
 #   git -C path/to/submodule sparse-checkout init --cone
-#   git -C path/to/submodule sparse-checkout set ontologies mappings shapes
+#   git -C path/to/submodule sparse-checkout set ontologies mappings shapes examples
 #
 # Or copy this file to .git/info/sparse-checkout in the submodule's git directory
 #

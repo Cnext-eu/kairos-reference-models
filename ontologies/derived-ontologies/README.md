@@ -6,6 +6,88 @@ This directory contains domain-specific ontologies derived from and extending th
 
 ## Available Ontologies
 
+### DCSA Container Shipping Ontology
+**File:** `dcsa.ttl`  
+**Namespace:** `http://kairos.ai/ont/dcsa#`  
+**Version:** 1.0.0  
+**Created:** 2026-01-06
+
+#### Description
+Digital Container Shipping Association (DCSA) ontology for standardized digital container shipping operations.
+
+#### Coverage
+- **Booking:** BookingRequest, ConfirmedBooking, ShippingInstruction, Shipment
+- **Cargo:** CargoItem, Commodity, RequestedEquipment, UtilizedTransportEquipment
+- **Transport Documents:** BillOfLading, ElectronicBillOfLading (eBL), SeaWaybill
+- **Containers:** DryContainer, ReeferContainer, TankContainer, FlatRackContainer, OpenTopContainer, PlatformContainer
+- **Events:** VesselDepartureEvent, VesselArrivalEvent, GateInEvent, GateOutEvent, LoadedOnVesselEvent, DischargedFromVesselEvent, EmptyContainerPickupEvent, EmptyContainerReturnEvent, DocumentIssuedEvent, DocumentSurrenderedEvent
+- **Party Roles:** Shipper, Consignee, Carrier, BookingParty, NotifyParty, FreightForwarder
+- **Locations:** Port, Terminal, PlaceOfReceipt, PortOfLoading, PortOfDischarge, PlaceOfDelivery, TransshipmentPort
+
+#### Standards Alignment
+- DCSA API Standards (Track & Trace, Bill of Lading, Booking)
+- ISO 6346 container identification standard
+- UN/LOCODE for location identification
+- SOLAS VGM (Verified Gross Mass) requirements
+- SCAC (Standard Carrier Alpha Code)
+- Harmonized System (HS) codes
+- Incoterms
+
+#### Key Features
+- Pure DCSA-focused ontology without external dependencies
+- Complete container booking and shipping instruction workflow
+- Electronic Bill of Lading (eBL) support
+- Comprehensive container type hierarchy
+- Real-time track and trace event model
+- Document lifecycle management
+- Container status and equipment tracking
+- Temperature-controlled cargo support
+- Shipper-owned container (SOC) support
+- Verified Gross Mass (VGM) compliance
+
+---
+
+### Multi-Modal Transport (MMT) Ontology
+**File:** `MMT.ttl`  
+**Namespace:** `http://kairos.ai/ont/mmt#`  
+**Version:** 1.0.0  
+**Created:** 2026-01-06
+
+#### Description
+A comprehensive multi-modal transport and logistics ontology based on UN/CEFACT MMT Reference Data Model.
+
+#### Coverage
+- **Transport Execution:** TransportService, TransportServiceContract, TransportMovement
+- **Consignment Structure:** Consignment, ConsignmentItem, TransportCargo, LogisticsPackage
+- **Transport Legs:** TransportLeg, MainCarriageLeg, PreCarriageLeg, OnCarriageLeg
+- **Transport Equipment:** FreightContainer, RailwayWagon, RoadVehicle, SwapBody
+- **Means of Transport:** Vessel, Aircraft, Train, Truck
+- **Party Roles:** Consignor, Consignee, Carrier, FreightForwarder, NotifyParty, CustomsBroker, TerminalOperator
+- **Locations:** Port, Airport, RailTerminal, Warehouse, DistributionCenter, BorderCrossing, ContainerTerminal
+- **Events:** DepartureEvent, ArrivalEvent, LoadingEvent, UnloadingEvent, TransshipmentEvent, CustomsClearanceEvent
+- **Documents:** BillOfLading, AirWaybill, SeaWaybill, RailwayConsignmentNote, RoadConsignmentNote, CargoManifest, PackingList, CustomsDeclaration, DangerousGoodsDeclaration
+
+#### Standards Alignment
+- UN/CEFACT Multi-Modal Transport (MMT) Reference Data Model
+- UN/LOCODE for location identification
+- ISO container standards
+- IATA/ICAO airport codes
+- Incoterms for trade terms
+- Harmonized System (HS) codes for commodity classification
+- UN Dangerous Goods classification
+
+#### Key Features
+- Complete multi-modal transport chain modeling
+- Support for all major transport modes (sea, air, rail, road)
+- Comprehensive party role framework
+- Equipment and means of transport management
+- Event tracking and milestone management
+- Document lifecycle support
+- Regulatory compliance (customs, dangerous goods)
+- Location and facility modeling with standard codes
+
+---
+
 ### Supply Chain Ontology
 **File:** `supply-chain.ttl`  
 **Namespace:** `http://kairos.ai/ont/supply-chain#`  
